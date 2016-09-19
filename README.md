@@ -1,1 +1,1 @@
-# Web-Event-
+# Web-Event-Using Django Framework
