@@ -1,0 +1,19 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+body{
+font-size:16px;
+margin:0px 0px 0px 0px;
+background:url(bg.png);
+}
+.wrapper{
+margin-left:auto;
+margin-right:auto;
+margin-bottom:10px;
+padding:0px 0px 0px 0px;
+width:80%;
+border-top:3px solid RGB(184,184,184);
+margin-top:10px;
+background:#fff;
+}
