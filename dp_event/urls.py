@@ -1,0 +1,36 @@
+from django.conf.urls import patterns,include,url
+from dp_event import views
+
+urlpatterns = patterns('dp_event.views',
+    
+    url(r'^login_required/kudu_login/$','kudu_login',name='kudu_login'),
+    url(r'^event/(\d+)','detail_event',name='detail_event'),
+    url(r'^event/join/(\d+)/(\d+)','join_event',name='join_event'),
+    url(r'^event/join/process/(?P<id_event>\d+)/$','process_join_event',name='process_join_event'),
+    url(r'^event/join/process/akhir/(?P<id_event>\d+)/(\d+)$','process_join_event2',name='process_join_event2'),
+    url(r'^tiket/(?P<id_event>\d+)/$', 'process_join_event',name='process_join_event'),
+    url(r'^accounts/login/$', 'login',name='login'),
+    url(r'^accounts/auth/$', 'auth_view',name='auth_view'),
+    url(r'^accounts/logout/$', 'logout',name='logout'),
+    url(r'^accounts/loggedin/$', 'loggedin',name='loggedin'),
+    url(r'^event/proses_daftar/$','proses_daftar',name='proses_daftar'),
+    url(r'^event/proses_daftar/pengguna/(?P<id_user>\d+)$','proses_daftar_pengguna',name='proses_daftar_pengguna'),
+    url(r'^accounts/loggedin/profile/(?P<id_user>\d+)$', 'profile',name='profile'),
+    url(r'^accounts/register/$', 'register_user',name='register_user'),
+    url(r'^accounts/invalid/$', 'invalid_login',name='invalid_login'),
+    url(r'^accounts/register_success/$', 'register_success',name='register_success'),
+    url(r'^event/daftar/$', 'daftar',name='daftar'),
+    url(r'^accounts/loggedin/data_profile/(\d+)$','data_profile',name='data_profile'),
+    url(r'^accounts/loggedin/change_password/(\d+)$','change_password',name='change_password'),
+    url(r'^accounts/loggedin/proses/change_password/(\d+)/$','proses_change_password',name='proses_change_password'),
+    url(r'^accounts/loggedin/konfirmasi/(\d+)/(\d+)/(\d+)$','konfirmasi',name='konfirmasi'),
+    url(r'^accouonts/loggedin/konfirmasi/proses/(?P<id_visitor>\d+)/(\d+)$','proses_konfirmasi',name='proses_konfirmasi'),
+    url(r'^accouonts/loggedin/cetak/tiket$','cetak_tiket',name='cetak_tiket'),
+    url(r'^accounts/loggedin/ganti/email/(?P<id_user>\d+)$','ganti_email',name='ganti_email'),
+    url(r'^accounts/loggedin/konfirmasi/email/(?P<id_user>\d+)','konfirmasi_email',name='konfirmasi_email'),
+    url(r'^accounts/loggedin/email','email',name='email'),
+    url(r'^accounts/loggedin/galeri','galeri_page',name='galeri_page'),
+    url(r'^accounts/loggedin/detail_galeri/(\d+)$','detail_galeri_page',name='detail_galeri_page'),
+    url(r'^page/term$','term_condition',name='term_condition'),
+
+)
