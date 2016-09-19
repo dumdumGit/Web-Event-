@@ -1,0 +1,65 @@
+{% extends 'loggedin.html' %}
+{% block content %}
+
+<h1>Ikut Acara - {{event.title}}</h1>
+<hr>
+
+
+<form role="form" action="/event/join/process/{{event.id}}/" method="POST" enctype="multipart/form-data" name="form1" >
+{% csrf_token %}
+<table>
+<tr>
+<td><label><b><font size="4px">Nama</font></label></td>
+<td><input type="text"  id="forminput" name="name" placeholder="Nama Anda" value="{{user.pengguna.nama_depan}} {{user.pengguna.nama_belakang}}" class="textfield" size="30"></td>
+</tr>
+
+{% if user.pengguna.jenis_kelamin == 'laki-laki' %}
+<tr>
+<td><label><b><font size="4px">Jenis Kelamin</font></label>
+<td><input type="radio" name="jk" value="laki_laki" checked="" >Laki-Laki
+<input type="radio" name="jk" value="Perempuan" >Perempuan</td>
+</tr>
+{% endif %}
+{% if user.pengguna.jenis_kelamin == 'perempuan' %}
+<tr>
+<td><label><b><font size="4px">Jenis Kelamin</font></label>
+<input type="radio" name="jk" value="laki_laki" >Laki-Laki
+<input type="radio" name="jk" value="Perempuan" checked="">Perempuan
+</td>
+</tr>
+{% endif %}
+
+
+<tr>
+<td><label for="formInput"><b><font size="4px">Email</font></label></td>
+<td><input type="email"  id="formInput" name="email" placeholder="Email Anda" value="{{user.pengguna.email}}" class="textfield" size="30" readonly ></td>
+</tr>
+
+<tr>
+<td><label for="formInput"><b><font size="4px">Telepon</font></label></td>
+<td><input type="text"  id="formInput" name="phone" placeholder=" Nomor Telepon.." value="{{user.pengguna.telepon}}"class="textfield" size="30"></td>
+
+<tr>
+<td><label><b><font size="4px">kota</font></label></td><td><input type="text" name="kota" placeholder="Kota Tempat Tinggal" value="{{user.pengguna.kota}}"class="textfield" size="30"></td>
+</tr>
+
+<tr>
+<td><label><b><font size="4px">Nomor KTP</font></label></td><td><input type="text" name="no_ktp" size="20" placeholder="Nomer KTP anda" value="{{user.pengguna.no_ktp}}" class="textfield" size="30"></td>
+</tr>
+
+<tr>
+<td><label><b><font size="4px">Alamat</font></label></td><td><input type="text" name="alamat" size="20" placeholder="alamat Tempat Tinggal" value="{{user.pengguna.alamat}}" class="textfield" size="30"></td>
+</tr>
+<input type="hidden" name="keterangan" value="belum_konfirmasi"/>
+<input type="hidden" name="id_event" value="{{event.id}}"/>
+<input type="hidden" name="id_user" value="{{id}}"/>
+<input type="hidden" name="karcis" value="{{event.tiket|add:"-1"}}"/>
+<tr><td>
+<a href="/event/{{event.id}}" class="btn btn-default">Batal</a>
+<input type="submit" value="Next" class="button"/></td>
+</tr>
+</table>
+</form>
+
+
+{% endblock %}

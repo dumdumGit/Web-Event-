@@ -1,0 +1,83 @@
+{% extends 'loggedin.html' %}
+{% block content %}
+
+<h3><font color="grey">Detail Event</font></h3><hr><br/>
+<table>
+<tr><td></td><td><img src="/media/{{event.poster}}" height="350" width="250px" align="center"></td>
+<td>
+<div class="rincian">
+<h1><font color="purple">{{ event.title | upper }}</font></h1>
+
+<div class="well">
+<p>Diselenggarakan oleh {{ event.organizer }}</p>
+<p>Tanggal : {{ event.date_begin }} 
+<p>hingga {{ event.date_end }}
+<p> Tiket yang disediakan : {{event.tiket}}
+<p>Tiket tersedia :{{event.tersedia}}
+<p>venue: {{ event.venue }} 
+<p>info lain: {{ event.about }}
+<br><br>
+</div>
+<div class="pull-right">
+{% if event.tersedia != 0 %}
+<a style="margin-right:30px;" href="/event/join/{{event.id}}/{{id}}" class="btn btn-default" ><input type="Submit" value="Ikut Acara" class="button_detail"> </a>
+{% else %}
+<a style="margin-right:30px;"  class="btn btn-default">Event Berakhir</a>
+</div>{% endif %}</div></div>
+</tr>
+</table>
+
+<br><br>
+<div class="col-md-12">
+<h2><font color="red">Daftar Pengunjung</font></h2>
+<hr>
+<br>
+
+<div class="well col-sm-3">
+
+	<table class="tables">
+    <thead>
+            <tr>
+                
+                <th>Peserta</th>
+		<th>Menunggu Konfirmasi</th>
+		
+            </tr>
+    </thead>
+    <tbody>
+{% for visitor in list_visitor %}
+{% for belum in list_visitor_belum %}
+
+            <tr>
+{% if list_visitor %}
+
+                <td>{{visitor.name}}</td>
+{% else %}
+     <td>ga ada</td>
+{% endif %}
+
+{% if list_visitor_belum %}
+
+
+		<td><font color="purple">{{belum.name}}</font></td>
+{% else %}
+   <td>ga ada</td>
+{% endif %}
+
+
+{% endfor %}
+{% endfor %}
+    </tbody>       
+
+     
+</table>
+
+</div>
+
+
+</div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,199 @@
+<html>
+<head>
+<title></title>
+{%load staticfiles%}
+<link rel="stylesheet" type="text/css" href="{% static 'user.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'dialog.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'jquery.bxslider.css' %}"/>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'jquery.bxslider.js' %}"></script>
+<script type="text/javascript" src="{% static 'jquery.bxslider.min.js' %}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.slider1').bxSlider({
+    slideWidth: 300,
+    minSlides: 2,
+    maxSlides: 3,
+    slideMargin: 10
+  });
+});
+</script>
+</head>
+<body>
+
+
+
+
+<div class="head">
+<div class="batas_head">
+
+<div class="pop">
+{% if user.is_authenticated %}<a href="/accounts/loggedin/profile/{{id}}">Profile</a>{% else %}<a href="#muncul">Daftar</a>{% endif %}
+</div>
+<div class="pop">
+{% if user.is_authenticated %}<a href="/accounts/logout/">Logout</a>{% else %}<a href="#muncul2">Login</a>{% endif %}
+</div>
+<table align="right">
+<form action="#" method="POST">
+<tr><td><input type="text" name="cari" placeholder="Search..." class="t_field_cari"></td><td><input type="submit" value="Search" class="button"></td></tr>
+</form>
+</table>
+</div>
+</div><! close head !>
+
+<div id="wrapper">
+
+
+
+<div class="menu">
+<li class="awal"><a href="/">Home</a></li>
+<li><a href="/accounts/loggedin/galeri">Gallery</a></li>
+<li><a href="/page/term">Term & Condition</a></li>
+<li><a href="#muncul4">Konfirmasi</a></li>
+</div>
+
+<div class="wrap_list_event">
+
+
+{% for event in list_event %}
+<div class="list_event">
+
+<table>
+<tr><td><img src="/media/{{event.poster}}" width="280px" height="250px"></td></tr>
+<tr><td><font color="purple"><b>{{event.title|upper}}</td></tr>
+<tr><td>Tanggal : {{event.date_begin}}</td></tr>
+<tr><td></td></tr>
+<tr><td><a href="/event/{{event.id}}"><input type="submit" value="Detail Event" class="button"></a></td></tr>
+</table>
+</div>
+{%endfor%}
+</div><! close wrap list event !>
+
+<div class="konten">
+
+<h2>Event Lainnya   </h2><tulisan>*harus ada internet</tulisan><hr><br/>
+<div class="slider1">
+ {% for events in daftar_event %} 
+<div class="slide">
+<div class="list_event2">
+
+
+<table>
+<tr><td><img src="/media/{{events.poster}}" width="270px" height="200px"></td></tr>
+<tr><td><font color="purple"><b>{{events.title|upper}}</td></tr>
+<tr><td>Tanggal : {{events.date_begin}}</td></tr>
+<tr><td></td></tr>
+<tr><td><a href="/event/{{events.id}}"><input type="submit" value="Detail Event" class="button"></a></td></tr>
+</table>
+</div>
+</div>{% endfor %}
+
+</div>
+
+</div>
+
+<div class="konten">
+
+<h4>Foto</h4><hr><br/>
+{% for album in album %}
+<img src="/media/{{album.album}}" width="150px" height="150px">
+{% endfor %}
+
+</div>
+
+</div><! close wrap !>
+
+
+
+
+<a href="#" id="muncul"></a>
+<div class="popup">
+<h3>Daftar</h3>
+<table>
+<form action="/event/proses_daftar/" method="GET" enctype="multipart/form-data">
+{% csrf_token %}
+{{username}}
+{{daftar}}
+
+<tr>
+<td>
+<input type="submit" value="daftar">
+</td>
+</tr>
+</form>
+</table>
+
+<a class="close" href="#close"></a>
+
+
+
+</div>
+
+<a href="#" id="muncul2"></a>
+<div class="popup">
+<h3>Login </h3>
+{% block content %}
+	{% if form.errors %}
+		<p>Maaf username atau password anda mungkin salah silahkan cek lagi</p>
+	{% endif %}
+<table border="0">
+<tr>
+<td><form action="/accounts/auth/" method="GET">
+{% csrf_token %}
+{{form}}
+<tr>
+<td><input type="submit" value="Masuk" ></td><td>Belum punya akun?klik - <a href="/#muncul">Daftar</a></td>
+
+</form>
+
+{% endblock %}
+</td>
+
+</tr>
+</table>
+
+
+<a class="close" href="#close"></a>
+</div>
+
+<a href="#" id="muncul3"></a>
+<div class="popup">
+<h3>Gagal Login</h3>
+	<p>Periksa Kembali Username atau Password yang anda isikan</p>
+	<p>Click <a href="/accounts/invalid/#muncul2">here</a>to login again</p>
+
+<a class="close" href="#close"></a>
+
+
+
+</div>
+
+<a href="#" id="muncul4"></a>
+<div class="popup">
+
+<p>Silahkan<a href="#muncul2"> login</a> terlebih dahulu </p>
+<a class="close" href="#close"></a>
+
+
+
+</div>
+
+<a href="#" id="muncul5"></a>
+<div class="popup">
+<h3>Login </h3>
+silahkan konfirmasi email terlebih dahulu.
+<br>
+belum menerima email konfirmaasi?==><a href="/accounts/loggedin/email">Kirim Ulang</a>
+<br>atau ganti email<br>
+<form action="/accounts/loggedin/ganti/email/{{id}}" method="GET" enctype="multipart/form-data">
+<p><label>Email Baru</label></p>
+<p>{{daftar.email}}</p>
+<input type="submit" value="Ganti Email">
+</form>
+
+<a class="close" href="#close"></a>
+</div>
+
+
+</body>
+</html>

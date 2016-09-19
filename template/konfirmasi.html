@@ -1,0 +1,30 @@
+{% extends "profile.html" %}
+{% block content %}
+{% for event in event %}
+{% for visitor in visitor %}
+<h4>Konfirmasi Pembayaran </h4><hr />
+<p><b>Nama</b></p>
+<p>{{visitor.name}}</p>
+
+<p><b>Event yang diikuti</b></p>
+<p>{{event.title}}</p><br>
+
+<form  action="/accouonts/loggedin/konfirmasi/proses/{{visitor.id}}/{{id}}" method="GET" enctype="multipart/form-data">
+{% csrf_token %}
+<p><label><b>Nama sesuai Rekening :</b></label></p>
+<p><input type="text" name="nama_rekening" size="35" placeholder="Nama sesuai pada Rekening"></p>
+
+<p><label><b>Bank :</b></label></p>
+<p><select name="bank"><option>Bank Mandiri</option><option>Bank BCA</option><option>Bank BRI</option><option>Bank CIMB NIAGA</option><option>Bank Danamon</option><option>Bank Mega</option><option>Bank DKI</option><option>Bank Lain..</option></select></p>
+
+<p><label><b>Upload Bukti pembayaran</b></label></p>
+<p><input id="foto" type="file" name="bukti"></p>
+<input type="hidden" value="{{event.id}}" name="id_event">
+<input type="hidden" value="{{visitor.name}}" name="nama">
+<input type="hidden" value="{{id}}" name="id_user">
+<input type="submit" value="Kirim">
+{% endfor %}
+{% endfor %}
+</form>
+
+{% endblock %}

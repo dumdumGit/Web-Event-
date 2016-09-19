@@ -1,0 +1,133 @@
+<html>
+<head>
+<title></title>
+{%load staticfiles%}
+<link rel="stylesheet" type="text/css" href="{% static 'user.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'dialog.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'jquery.bxslider.css' %}"/>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'jquery.bxslider.js' %}"></script>
+<script type="text/javascript" src="{% static 'jquery.bxslider.min.js' %}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.slider1').bxSlider({
+    slideWidth: 300,
+    minSlides: 2,
+    maxSlides: 3,
+    slideMargin: 10
+  });
+});
+</script>
+<link rel="stylesheet" type="text/css" href="{% static 'peserta.css' %}"/>
+</head>
+<body>
+
+<a href="#" id="muncul"></a>
+<div class="popup">
+<h4>Hello, {{full_name}}</h4>
+<table>
+<tr>
+<td><img src={% static 'welcome.jpg' %} width="600" height="350"></td>
+</tr>
+</table>
+
+<a class="close" href="#close"></a>
+
+</div>
+
+<a href="#" id="muncul2"></a>
+<div class="popup">
+<h4>Hello, {{full_name}}</h4>
+<table>
+<tr>
+<td><img src={% static 'welcome.jpg' %} width="600" height="350"></td>
+</tr>
+</table>
+
+<a class="close" href="#close"></a>
+
+</div>
+
+
+<div class="head">
+<div class="batas_head">
+
+<div class="pop">
+<a href="/accounts/logout/">Logout</a>
+</div>
+<div class="pop">
+<a href="/accounts/loggedin/profile/{{id}}">Profile</a>
+</div>
+
+<table align="right" class="">
+<form action="#" method="GET">
+<tr><td><input type="text" name="cari" placeholder="Search..." class="t_field_cari"></td><td><input type="submit" value="Search" class="button"></td></tr>
+</form>
+</table>
+</div>
+</div><! close head !>
+
+<div id="wrapper">
+
+<div class="menu">
+<li class="awal"><a href="/accounts/loggedin/">Home</a></li>
+<li><a href="/accounts/loggedin/galeri">Gallery</a></li>
+<li><a href="#">Indeks</a></li>
+<li><a href="/accounts/loggedin/data_profile/{{id}}">Konfirmasi</a></li>
+</div>
+
+<div class="wrap_list_event">
+
+
+{% for event in list_event %}
+<div class="list_event">
+
+<table>
+<tr><td><img src="/media/{{event.poster}}" width="280px" height="250px"></td></tr>
+<tr><td><font color="purple"><b>{{event.title|upper}}</td></tr>
+<tr><td>Tanggal : {{event.date_begin}}</td></tr>
+<tr><td></td></tr>
+<tr><td><a href="/event/{{event.id}}"><input type="submit" value="Detail Event" class="button"></a></td></tr>
+</table>
+</div>
+{%endfor%}
+</div><! close wrap list event !>
+
+<div class="konten">
+{% block content %}
+<h2>Event Lainnya</h2><hr><br/>
+<div class="slider1">
+ {% for events in daftar_event %} 
+<div class="slide">
+<div class="list_event2">
+
+
+<table>
+<tr><td><img src="/media/{{events.poster}}" width="270px" height="200px"></td></tr>
+<tr><td><font color="purple"><b>{{events.title|upper}}</td></tr>
+<tr><td>Tanggal : {{events.date_begin}}</td></tr>
+<tr><td></td></tr>
+<tr><td><a href="/event/{{events.id}}"><input type="submit" value="Detail Event" class="button"></a></td></tr>
+</table>
+</div>
+</div>{% endfor %}
+
+</div>
+
+</div>
+
+<div class="konten">
+<h4>Foto</h4><hr><br/>
+{% for album in album %}
+<img src="/media/{{album.album}}" width="150px" height="150px">
+{% endfor %}
+{% endblock %}
+
+</div>
+
+</div><! close wrap !>
+
+
+
+</body>
+</html>

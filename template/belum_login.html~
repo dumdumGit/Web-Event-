@@ -1,0 +1,10 @@
+<img src="foto_1.jpg">
+
+<div id="posisi"><button style="margin-left:5%" onClick="print_d()">
+</button></div>
+
+ <script>
+ function print_d(){
+ window.open("print_login.html","_blank");
+ }
+ </script>

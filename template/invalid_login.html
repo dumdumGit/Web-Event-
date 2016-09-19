@@ -1,0 +1,31 @@
+{% extends 'list_event.html' %}
+
+{% block content %}
+<a href="#" id="muncul3"></a>
+<div class="popup">
+<h3>Your login details are invalid!</h3>
+	<p>Click <a href="/accounts/login/">here</a>to login again</p>
+
+<a class="close" href="#close"></a>
+
+
+
+</div>
+
+<a href="#" id="muncul5"></a>
+<div class="popup">
+<h3>Login </h3>
+silahkan konfirmasi email terlebih dahulu.
+<br>
+belum menerima email konfirmaasi?==><a href="accounts/loggedin/email">Kirim Ulang</a>
+<br>atau ganti email<br>
+<form action="accounts/loggedin/ganti/email" method="POST" enctype="multipart/form-data">
+<p><label>Email Baru</label></p>
+<p>{{form_daftar.email}}</p>
+</form>
+
+<a class="close" href="#close"></a>
+</div>
+
+
+{% endblock %}

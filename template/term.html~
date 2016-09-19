@@ -1,0 +1,180 @@
+<html>
+<head>
+<title></title>
+{%load staticfiles%}
+<link rel="stylesheet" type="text/css" href="{% static 'user.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'dialog.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'jquery.bxslider.css' %}"/>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'jquery.bxslider.js' %}"></script>
+<script type="text/javascript" src="{% static 'jquery.bxslider.min.js' %}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.slider1').bxSlider({
+    slideWidth: 300,
+    minSlides: 2,
+    maxSlides: 3,
+    slideMargin: 10
+  });
+});
+</script>
+</head>
+<body>
+
+
+
+
+<div class="head">
+<div class="batas_head">
+
+<div class="pop">
+<a href="#muncul">Daftar</a>
+</div>
+<div class="pop">
+<a href="#muncul2">Login</a>
+</div>
+<table align="right">
+<form action="#" method="POST">
+<tr><td><input type="text" name="cari" placeholder="Search..." class="t_field_cari"></td><td><input type="submit" value="Search" class="button"></td></tr>
+</form>
+</table>
+</div>
+</div><! close head !>
+
+<div id="wrapper">
+
+
+
+<div class="menu">
+<li class="awal"><a href="/">Home</a></li>
+<li><a href="/accounts/loggedin/galeri">Gallery</a></li>
+<li><a href="/page/term">Term & Condition</a></li>
+<li><a href="#muncul4">Konfirmasi</a></li>
+</div>
+
+<div class="wrap_list_event_term">
+<font color="#F43C6F"><h2>Term & Condition<hr color="purple"></h2></font>
+<p>
+Selama menggunakan IndoEvent.com maka Anda setuju untuk terikat dan mematuhi syarat dan ketentuan yang berlaku. Kami dapat merubah syarat dan ketentuan pada setiap saat, dengan atau tanpa pemberitahuan sebelumnya dan pengguna setuju untuk mematuhi syarat dan ketentuan tersebut.
+</p>
+
+<p>1.    Kami berhak untuk dapat menghentikan atau mensuspend akun dan/atau penggunaan anda untuk jangka waktu sementara ataupun seterusnya, dengan atau tanpa pemberitahuan terlebih dahulu. Kami berhak untuk dapat menghentikan akun atau penggunaan anda pada situs kami dengan alasan apapun tanpa harus memberitahukan alamasan tersebut. Dan kami tidak bertanggung jawab kepada anda ataupun pihak lainnya atas penghentian akun atau penggunaan yang telah dihentikan dari situs kami.
+
+<p>2.     Segala sesuatu informasi tentang profil pengguna yang di berikan kepada kami akan kami jaga kerahasiaannya dan tidak akan dipulikasikan kepada pihak ketiga manapun kecuali dengan persetujuan pengguna yang akan ditanyakan sebelumnya.
+<p>3.        Anda setuju bahwa apabila kami mendapatkan surat perintah pengadilan yang dikeluarkan oleh pengadilan atau penegak hukum Negara Indonesia, kami harus memenuhi dan bekerja sama dengan pihak tersebut dan memberikan informasi mengenai anda termasuk data profil yang telah diberikan kepada kami, dan informasi lainnya tanpa memerlukan persetujuan dari pengguna.
+<p>4.         Anda berhak untuk melindungi hak pribadi anda dengan menghubungi kami melalui email, surat atau telepon yang dapat ditemukan di situs kami.
+
+<p>5.     Anda setuju untuk bertanggung jawab dan membebaskan kami dan pihak " pihak yang bekerja sama dengan kami atas setiap kerugian yang kami terima dari pelanggaran yang anda lakukan terhadap syarat dan ketentuan yang berlaku.
+
+<p>6.     Untuk event berbayar :
+        Konfirmasi pembayaran paling lambat 1 hari setelah pemesanan. Jika tidak, IndoEvent berhak menjual tiket tersebut kepada pemesan lain.
+        Tiket yang sudah dibeli tidak dapat dikembalikan atau di cancel.
+        Bukti pembayaran wajib di upload di halaman "Konfirmasi" pada kolom konfimasi pemesanan.
+        Anda wajib membawa print out tiket yang bisa di download di halaman "konfirmasi" setelah anda konfirmasi sebagai tanda bukti 		pendaftaran.
+
+<p>7.     Untuk event tidak berbayar :
+        Anda harus memesan tiket terlebih dahulu di Indoevent
+        Anda harus menunggu konfirmasi dari IndoEvent yang menyatakan bahwa Anda terpilih sebagai peserta dari event yang akan diadakan.
+        Anda wajib membawa print out tiket yang bisa di download di halaman "Konfirmasi" sebagai tanda bukti pendaftaran.
+
+    Untuk informasi lebih lanjut silahkan hubungi kami pada jam kerja Senin " Jumat pukul 10.00 " 17.00 WIB di nomor telepon (021) 79184625 ext.7406 atau email ke promosi@indo.com | Subject : namaevent
+
+
+</div><! close wrap list event !>
+
+</div><! close wrap !>
+
+
+
+
+<a href="#" id="muncul"></a>
+<div class="popup">
+<h3>Daftar</h3>
+<table>
+<form action="/event/proses_daftar/" method="GET" enctype="multipart/form-data">
+{% csrf_token %}
+{{username}}
+{{daftar}}
+
+<tr>
+<td>
+<input type="submit" value="daftar">
+</td>
+</tr>
+</form>
+</table>
+
+<a class="close" href="#close"></a>
+
+
+
+</div>
+
+<a href="#" id="muncul2"></a>
+<div class="popup">
+<h3>Login </h3>
+{% block content %}
+	{% if form.errors %}
+		<p>Maaf username atau password anda mungkin salah silahkan cek lagi</p>
+	{% endif %}
+<table border="0">
+<tr>
+<td><form action="/accounts/auth/" method="GET">
+{% csrf_token %}
+{{form}}
+<tr>
+<td><input type="submit" value="Masuk" ></td><td>Belum punya akun?klik - <a href="/#muncul">Daftar</a></td>
+
+</form>
+
+{% endblock %}
+</td>
+
+</tr>
+</table>
+
+
+<a class="close" href="#close"></a>
+</div>
+
+<a href="#" id="muncul3"></a>
+<div class="popup">
+<h3>Gagal Login</h3>
+	<p>Periksa Kembali Username atau Password yang anda isikan</p>
+	<p>Click <a href="/accounts/invalid/#muncul2">here</a>to login again</p>
+
+<a class="close" href="#close"></a>
+
+
+
+</div>
+
+<a href="#" id="muncul4"></a>
+<div class="popup">
+
+<p>Silahkan<a href="#muncul2"> login</a> terlebih dahulu </p>
+<a class="close" href="#close"></a>
+
+
+
+</div>
+
+<a href="#" id="muncul5"></a>
+<div class="popup">
+<h3>Login </h3>
+silahkan konfirmasi email terlebih dahulu.
+<br>
+belum menerima email konfirmaasi?==><a href="/accounts/loggedin/email">Kirim Ulang</a>
+<br>atau ganti email<br>
+<form action="/accounts/loggedin/ganti/email/{{id}}" method="GET" enctype="multipart/form-data">
+<p><label>Email Baru</label></p>
+<p>{{daftar.email}}</p>
+<input type="submit" value="Ganti Email">
+</form>
+
+<a class="close" href="#close"></a>
+</div>
+
+
+</body>
+</html>

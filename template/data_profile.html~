@@ -1,0 +1,77 @@
+{% extends "profile.html" %}
+{% block content %}
+<h3>Riwayat Event</h3><hr /><br />
+
+{% for riwayat in riwayat %}
+
+<table>
+<tr>
+<td>  <h4>{{riwayat.target_event.title}}</h4></td>
+</tr>
+<tr>
+<td>Tanggal Mulai :  {{riwayat.target_event.date_begin}}</td>
+</tr>
+<tr>
+<td>Sampai tanggal :  {{riwayat.target_event.date_end}}</td>
+</tr>
+<tr>
+<td>Venue :  {{riwayat.target_event.venue}}</td>
+</tr>
+<tr>
+<td>{{riwayat.target_event.about}}</td>
+
+</tr> 
+
+{% if riwayat.status == False %}
+<tr><td><a href="/accounts/loggedin/konfirmasi/{{riwayat.target_event.id}}/{{id}}/{{riwayat.id}}"><input type="submit" value="{{proses}}Konfirmasi"></a></td></tr>
+{% else %}
+<tr><td><div id="posisi"><button style="margin-left:5%" onClick="print_d()"><input type="submit" value="Cetak tiket"></button></div>
+ <script>
+ function print_d(){
+ window.open("/accouonts/loggedin/cetak/tiket","_blank");
+ }
+ </script></td></tr>
+{% endif %}
+
+</table>
+<hr/><br/>
+
+{% endfor %}
+
+{% for confirm in confirm %}
+
+<table>
+<tr>
+<td>  <h4>{{confirm.target_event.title}}</h4></td>
+</tr>
+<tr>
+<td>Tanggal Mulai :  {{confirm.target_event.date_begin}}</td>
+</tr>
+<tr>
+<td>Sampai tanggal :  {{confirm.target_event.date_end}}</td>
+</tr>
+<tr>
+<td>Venue :  {{confirm.target_event.venue}}</td>
+</tr>
+<tr>
+<td>{{confirm.target_event.about}}</td>
+
+</tr> 
+
+{% if confirm.status == False %}
+<tr><td><a href=""><input type="submit" value="expired"></a></td></tr>
+{% else %}
+<tr><td><div id="posisi"><button style="margin-left:5%" onClick="print_d()"><input type="submit" value="Cetak tiket"></button></div>
+ <script>
+ function print_d(){
+ window.open("print_simpanan.php","_blank");
+ }
+ </script></td></tr>
+{% endif %}
+</table>
+<hr/><br/>
+
+{% endfor %}
+
+{% endblock %}
+

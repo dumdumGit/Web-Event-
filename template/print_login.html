@@ -1,0 +1,12 @@
+{% extends "profile.html" %}
+{% block content %}
+<img src="{{riwayat.target_event.cetak_tiket}}">
+ <script>
+ window.load = print_d();
+ function print_d(){
+ window.print();
+ }
+ </script>
+</body>
+</html>
+{% endblock %}

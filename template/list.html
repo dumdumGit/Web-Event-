@@ -1,0 +1,200 @@
+<html>
+<head>
+<title>Daftar Event</title>
+{%load staticfiles%}
+<script type="text/javascript" src="{%static 'bootstrap/js/bootstrap.min.js'%}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'back.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'dialog.css' %}"/>
+</head>
+<body>
+
+
+<div class="head">
+
+
+<div class="batas_head">
+
+<div class="pop">
+<a href="#muncul">Daftar</a>
+</div>
+<div class="pop">
+<a href="#muncul2">Login</a>
+</div>
+<table align="right">
+<form action="#" method="GET">
+<tr><td><input type="text" name="cari" placeholder="Search..."></td><td><input type="submit" value="Cari"></td></tr>
+</form>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="kepala">
+<img src="{% static 'kepala.jpg' %}">
+</div>
+
+<div class="wrapper">
+
+<div class="title">
+
+<div class="menu1">
+<a href="#">Gallery</a>
+</div>
+
+<div class="menu2">
+<a href="/">Home</a>
+</div>
+
+<div class="menu3">
+<a href="#">Konfirmasi</a>
+</div>
+</div>
+
+
+
+
+<div class="artikel">
+
+<h1>Daftar Event yang Bisa Anda Kunjungi</h1>
+
+{% for event in list_event %}
+tanggal : {{ event.date_begin|timesince }} 
+<br>
+<strong>{{event.title|upper}}</strong>
+<hr/>
+Tiket  {{event.tiket}}<br/>
+Tiket tersedia : {{event.tersedia}}<br/>
+
+<hr>
+Diselenggarakan oleh {{event.organizer}}<br/>
+dari : {{event.date_begin}}<br/>hingga : {{event.date_end}}<br><br>
+<a href="/event/{{event.id}}" class="btn btn-default">Lihat Detail</a>
+{%endfor%}
+</div>
+</div>
+
+
+
+
+
+<a href="#" id="muncul"></a>
+<div class="popup">
+<h3>Daftar</h3>
+<table>
+<form action="/event/proses_daftar/" method="GET" enctype="multipart/form-data">
+{% csrf_token %}
+<tr>
+<td><label>Username</label></td><td><input type="text" name="username" size="20" placeholder="Masukkan Nama"></td></tr>
+<tr>
+<td><label>Password</label></td><td><input type="password" name="password" size="20" placeholder="Masukkan Password"></td>
+</tr>
+<tr>
+<td><label>First Name</label></td><td><input type="text" name="first_name" size="20" placeholder="Nama Depan"></td>
+</tr>
+<tr>
+<td><label>last Name</label></td><td><input type="text" name="last_name" size="20" placeholder="Nama Belakang"></td>
+</tr>
+<tr><td><label>Jenis Kelamin</label></td><td>
+<input type="radio" name="jk" value="laki_laki" >Laki-Laki</td><br/><td><input type="radio" name="jk" value="Perempuan" >Perempuan</td>
+</tr>
+<tr>
+<td><label>Email</label></td><td><input type="email" id="formInput" name="email" placeholder="Email Anda"></td>
+</tr>
+<tr>
+<td><label>Nomor KTP</label></td><td><input type="text" name="no_ktp" size="20" placeholder="Nomer KTP anda"></td>
+</tr>
+<tr>
+<td><label>Kota</label></td><td><input type="text" name="kota" placeholder="Kota Tempat Tinggal"></td>
+</tr>
+<tr>
+<td><label>alamat</label></td><td><input type="text" name="alamat" size="20" placeholder="alamat Tempat Tinggal"></td>
+</tr>
+<tr>
+<td><label>No Telepon</label></td><td><input type="text" name="telepon" size="20" placeholder="No yang dapat dihubungi"></td>
+</tr>
+<tr>
+<td><label>No Telepon 2</label></td><td><input type="text" name="telepon2" size="20" placeholder="Nomor Alternatif"></td>
+</tr>
+<tr>
+<td><label>Foto</label></td><td><input id="foto" type="file" name="foto"></td>
+</tr>
+
+<tr>
+<td>
+<input type="submit" value="daftar">
+</td>
+</tr>
+</form>
+</table>
+
+<a class="close" href="#close"></a>
+
+
+
+</div>
+
+<a href="#" id="muncul2"></a>
+<div class="popup">
+<h3>Login </h3>
+{% block content %}
+	{% if form.errors %}
+		<p>Maaf username atau password anda mungkin salah silahkan cek lagi</p>
+	{% endif %}
+<table border="0">
+<tr>
+<td><form action="/accounts/auth/" method="GET">
+{% csrf_token %}
+<label>Username </label></td>
+<td>
+
+
+<input type="text" name="username" placeholder="username" size="8">
+</td>
+</tr>
+
+<tr>
+<td><label>Password</label></td>
+<td>
+<input type="password" name="password" placeholder="Password" size="8">
+</tr>
+<tr>
+<td><input type="submit" value="Masuk" ></td><td>Belum punya akun?klik - <a href="/accounts/invalid/#muncul">Daftar</a></td>
+
+</form>
+
+{% endblock %}
+</td>
+
+</tr>
+</table>
+
+
+<a class="close" href="#close"></a>
+</div>
+
+<a href="#" id="muncul3"></a>
+<div class="popup">
+<h3>Gagal Login</h3>
+	<p>Periksa Kembali Username atau Password yang anda isikan</p>
+	<p>Click <a href="/accounts/invalid/#muncul2">here</a>to login again</p>
+
+<a class="close" href="#close"></a>
+
+
+
+</div>
+
+<a href="#" id="muncul4"></a>
+<div class="popup">
+
+<p>Silahkan<a href="#muncul2"> login</a> terlebih dahulu untuk mengikuti Event</p>
+<a class="close" href="#close"></a>
+
+
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,133 @@
+<html>
+<head>
+<title>Daftar Event</title>
+{%load staticfiles%}
+<script type="text/javascript" src="{%static 'bootstrap/js/bootstrap.min.js'%}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'back.css' %}"/>
+</head>
+<body>
+
+
+<div class="head">
+
+<div class="batas_head">
+<img src="Ua-trans.png">
+
+<div class="menu2">
+<a href="#">Gallery</a>
+</div>
+
+<div class="menu1">
+<a href="#">Home</a>
+</div>
+
+<div class="menu2">
+<a href="#">Konfirmasi</a>
+</div>
+</div>
+
+</div>
+
+<div class="wrapper">
+<div class="title">
+<div class="judul">
+
+</div>
+<div class="judul2">
+
+
+</div>
+</div>
+
+<div class="tutup">
+<div class="artikel">
+
+
+
+<table>
+<form action="/event/proses_daftar/" method="GET" enctype="multipart/form-data">
+{% csrf_token %}
+<tr>
+<td><label>Username</label></td><td><input type="text" name="username" size="20"></td></tr>
+<tr>
+<td><label>Password</label></td><td><input type="password" name="password" size="20"></td>
+</tr>
+<tr>
+<td><label>First Name</label></td><td><input type="text" name="first_name" size="20"></td>
+</tr>
+<tr>
+<td><label>last Name</label></td><td><input type="text" name="last_name" size="20"></td>
+</tr>
+<tr>
+<td><label>Email</label></td><td><input type="email" id="formInput" name="email" placeholder="Email Anda"></td>
+</tr>
+<tr>
+<td><label>Nomor KTP</label></td><td><input type="text" name="no_ktp" size="20"></td>
+</tr>
+<tr>
+<td><label>alamat</label></td><td><input type="text" name="alamat" size="20"></td>
+</tr>
+<tr>
+<td><label>No Telepon</label></td><td><input type="text" name="telepon" size="20"></td>
+</tr>
+<tr>
+<td><label>No Telepon 2</label></td><td><input type="text" name="telepon2" size="20"></td>
+</tr>
+<tr>
+<td><label>Foto</label></td><td><input id="foto" type="file" name="foto"></td>
+</tr>
+
+<tr>
+<input type="submit" value="daftar">
+</tr>
+</form>
+</table>
+
+</div>
+<div class="cari">
+
+<div class="line">
+
+</div>
+
+<div class="line">
+<center><H3 CLASS="tulisan">Cari Artikel</H3></center>
+</div>
+<div class="side">
+
+
+</div>
+
+<div class="line">
+<center><H3 CLASS="tulisan">Top Artikel</H3></center>
+</div>
+<div class="side">
+
+
+
+
+</div>
+
+<div class="line">
+<center><H3 CLASS="tulisan">Artikel Baru</H3></center>
+</div>
+<div class="side">
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+</div>
+</body>
+</html>

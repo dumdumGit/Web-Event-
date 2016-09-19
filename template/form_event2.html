@@ -1,0 +1,152 @@
+{% extends "loggedin.html" %}
+{% block content %}
+
+<a href="#peserta"><input type="submit" value="1 Tiket"></a>
+<a href="#peserta2"><input type="submit" value="2 Tiket"></a>
+<a href="#peserta3"><input type="submit" value="3 Tiket"></a>
+<a href="#peserta4"><input type="submit" value="4 Tiket"></a>
+<a href="#peserta5"><input type="submit" value="5 Tiket"></a>
+<div class="detail_event">
+<form action="/event/join/process/akhir/{{id_event}}/{{user_id}}" method="GET" entype="multipart/form-data">
+<table>
+<tr ><td ><h5><b>Detail Registrasi</b></h5></td></tr>
+<tr><td><label>Nama </label></td><td>:</td><td><input type="text" name="nama" value="{{name}}" size="15"></td></tr>
+<tr><td><label>Jen Kelamin </label></td><td>:</td><td><input type="text" name="jk" value="{{jenis_kelamin}}" size="15"></td></tr>
+<tr><td><label>Phone </label></td><td>:</td><td><input type="text" name="phone" value="{{phone}}" size="15"></td></tr>
+<tr><td><label>Email </label></td><td>:</td><td><input type="text" name="email" value="{{email}}" size="15"></td></tr>
+<tr><td><label>No KTP </label></td><td>:</td><td><input type="text" name="no_ktp" value="{{no_ktp}}" size="15"></td></tr>
+<tr><td><label>Kota </label></td><td>:</td><td><input type="text" name="kota" value="{{kota}}" size="15"></td></tr>
+<tr><td><label>Alamat </label></td><td>:</td><td><input type="text" name="alamat" value="{{alamat}}" size="15"></td></tr>
+<tr><td><input type="hidden" name="user_id" value="{{user_id}}" size="15"></td></tr>
+<tr><td><input type="hidden" name="keterangan" value="{{Keterangan}}" size="15"></td></tr>
+</table>
+{% for event in event %}
+<div class="detail_event2">
+<table>
+<tr><td><label>Event </label></td><td>:</td><td><i>{{event.title}}<i></td></tr>
+<tr><td><label>Jumlah Tiket </label></td><td>:</td><td><i>{{event.tiket}}<i></td></tr>
+<tr><td><label>Tiket tersedia </label></td><td>:</td><td><i>{{event.tersedia}}<i></td></tr>
+</table>
+</div>
+{%endfor%}
+
+<p><tulisan>Sudah Yakin dengan data yang Anda isikan?</tulisan></p>
+<input type="submit" value="Daftar Event">
+
+
+</div>
+
+
+
+<div id="kiri">
+
+
+
+<a href="#" id="peserta5"></a>
+<div class="po5">
+<div id="kolom">
+Nama Peserta :<br>
+<input type="text" name="peserta_satu" size="35">
+</div>
+
+<div id="kolom">
+Nama Peserta ke-2:<br>
+<input type="text" name="peserta_dua" size="35">
+</div>
+
+<div id="kolom">
+Nama Peserta ke-3:<br>
+<input type="text" name="peserta_tiga" size="35">
+</div>
+
+<div id="kolom">
+Nama Peserta ke-4:<br>
+<input type="text" name="peserta_empat" size="35">
+</div>
+
+<div id="kolom">
+Nama Peserta ke-5:<br>
+<input type="text" name="peserta_lima" size="35">
+</div>
+
+</div>
+
+
+
+<a href="#" id="peserta4"></a>
+<div class="po4">
+<div id="kolom">
+Nama Peserta :<br>
+<input type="text" name="peserta_satu" size="35">
+</div>
+
+<div id="kolom">
+Nama Peserta ke-2:<br>
+<input type="text" name="peserta_dua" size="35">
+</div>
+
+<div id="kolom">
+Nama Peserta ke-3:<br>
+<input type="text" name="peserta_tiga" size="35">
+</div>
+
+<div id="kolom">
+Nama Peserta ke-4:<br>
+<input type="text" name="peserta_empat" size="35">
+</div>
+</div>
+
+
+<a href="#" id="peserta3"></a>
+<div class="po3">
+<div id="kolom">
+Nama Peserta :<br>
+<input type="text" name="peserta_satu" size="35">
+</div>
+
+<div id="kolom">
+Nama Peserta ke-2:<br>
+<input type="text" name="peserta_dua" size="35">
+</div>
+
+<div id="kolom">
+Nama Peserta ke-3:<br>
+<input type="text" name="peserta_tiga" size="35">
+</div>
+
+
+
+</div>
+
+
+
+<a href="#" id="peserta2"></a>
+<div class="po2">
+<div id="kolom">
+Nama Peserta :<br>
+<input type="text" name="peserta_satu" size="35">
+</div>
+
+<div id="kolom">
+Nama Peserta ke-2:<br>
+<input type="text" name="peserta_dua" size="35">
+</div>
+
+</div>
+
+
+<a href="#" id="peserta"></a>
+<div class="po">
+<div id="kolom">
+Nama Peserta :<br>
+<input type="text" name="peserta_satu" size="35">
+</div>
+
+</div>
+
+
+</form>
+
+
+
+{% endblock %}

@@ -1,0 +1,199 @@
+<html>
+<head>
+<title></title>
+{%load staticfiles%}
+<link rel="stylesheet" type="text/css" href="{% static 'user.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'dialog.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'slider.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'dialog.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'peserta.css' %}"/>
+</head>
+<body>
+
+
+
+
+<div class="head">
+<div class="batas_head">
+
+<div class="pop">
+<a href="/accounts/logout/">Logout</a>
+</div>
+<div class="pop">
+<a href="/accounts/loggedin/profile/{{id}}">Profile</a>
+</div>
+<table align="right">
+<form action="#" method="POST">
+<tr><td><input type="text" name="cari" placeholder="Search..." class="t_field_cari"></td><td><input type="submit" value="Search" class="button"></td></tr>
+</form>
+</table>
+</div>
+</div><! close head !>
+
+<div id="wrapper">
+
+<div class="menu">
+<li class="awal"><a href="/accounts/loggedin/">Home</a></li>
+<li><a href="/accounts/loggedin/galeri">Gallery</a></li>
+<li><a href="/">Konfirmasi</a></li>
+</div>
+
+
+<div class="konten">
+<div class="detail">
+{% for events in galeri %} 
+<p><h2><a href="/event/{{events.id}}"><font color="#F43C6F">{{events.events.title}}</a></font></h2></p><br>
+<font size="3px"><p>Hari & Tanggal :  {{events.events.date_begin}}</p>
+<p>Sampai dengan :  {{events.events.date_end}}</p>
+<p>Venue :  {{events.49events.venue}}</p>
+<p>Hari & Tanggal :  {{events.events.date_begin}}</p><br>
+<p>Marketing Public Relations 
+indo@event.com</p>
+<p>Telp : 022-6623649</p>
+<p>fax :  022-6626394</p></font><br><hr><br>
+<p>{{events.events.about}}</p>
+{% endfor %}
+</div>
+
+<div class="slider">
+{% if events %}
+{% for gambar in events %} 
+	<input type="radio" name="slide_switch" id="{{gambar.id}}" checked="checked"/>
+	<label for="{{gambar.id}}">
+
+		<img src="/media/{{gambar.album}}" width="50"/>
+
+	</label>
+
+	<img src="/media/{{gambar.album}}" width="450px"/>
+{% endfor %}
+	<!--Lets show the second image by default on page load-->
+{% else %}
+
+<input type="radio" name="slide_switch" id="{{gambar.id}}" checked="checked"/>
+	<label for="{{gambar.id}}">
+
+		
+	</label>
+<p><h1 align="center">Foto Tidak ada..</h1></p>
+	<img src="/media/{{gambar.album}}" width="450px"/>
+
+{% endif %}
+</div>
+
+
+</div>
+
+</div>
+
+<div class="konten">
+<h4>Galeri Lainnya</h4><hr><br/>
+{% for gambar in galerys %}
+<a href="/accounts/loggedin/detail_galeri/{{gambar.id}}">
+<div class="list_event3">
+<table>
+<tr><td><img src="/media/{{gambar.poster}}" width="250px" height="100px"></td></tr>
+<tr><td><font color="purple"><b>{{gambar.title}}</td></tr>
+<tr><td>{{gambar.date_begin}}</td></tr>
+</table>
+</div>
+</a>
+{%endfor%}
+</div>
+
+</div><! close wrap !>
+
+
+
+
+<a href="#" id="muncul"></a>
+<div class="popup">
+<h3>Daftar</h3>
+<table>
+<form action="/event/proses_daftar/" method="GET" enctype="multipart/form-data">
+{% csrf_token %}
+{{username}}
+{{daftar}}
+
+<tr>
+<td>
+<input type="submit" value="daftar">
+</td>
+</tr>
+</form>
+</table>
+
+<a class="close" href="#close"></a>
+
+
+
+</div>
+
+<a href="#" id="muncul2"></a>
+<div class="popup">
+<h3>Login </h3>
+{% block content %}
+	{% if form.errors %}
+		<p>Maaf username atau password anda mungkin salah silahkan cek lagi</p>
+	{% endif %}
+<table border="0">
+<tr>
+<td><form action="/accounts/auth/" method="GET">
+{% csrf_token %}
+{{form}}
+<tr>
+<td><input type="submit" value="Masuk" ></td><td>Belum punya akun?klik - <a href="/#muncul">Daftar</a></td>
+
+</form>
+
+{% endblock %}
+</td>
+
+</tr>
+</table>
+
+
+<a class="close" href="#close"></a>
+</div>
+
+<a href="#" id="muncul3"></a>
+<div class="popup">
+<h3>Gagal Login</h3>
+	<p>Periksa Kembali Username atau Password yang anda isikan</p>
+	<p>Click <a href="/accounts/invalid/#muncul2">here</a>to login again</p>
+
+<a class="close" href="#close"></a>
+
+
+
+</div>
+
+<a href="#" id="muncul4"></a>
+<div class="popup">
+
+<p>Silahkan<a href="#muncul2"> login</a> terlebih dahulu </p>
+<a class="close" href="#close"></a>
+
+
+
+</div>
+
+<a href="#" id="muncul5"></a>
+<div class="popup">
+<h3>Login </h3>
+silahkan konfirmasi email terlebih dahulu.
+<br>
+belum menerima email konfirmaasi?==><a href="/accounts/loggedin/email">Kirim Ulang</a>
+<br>atau ganti email<br>
+<form action="/accounts/loggedin/ganti/email/{{id}}" method="GET" enctype="multipart/form-data">
+<p><label>Email Baru</label></p>
+<p>{{daftar.email}}</p>
+<input type="submit" value="Ganti Email">
+</form>
+
+<a class="close" href="#close"></a>
+</div>
+
+
+</body>
+</html>

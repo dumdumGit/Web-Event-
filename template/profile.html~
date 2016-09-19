@@ -1,0 +1,202 @@
+<html>
+<head>
+<title>
+UGEvent.com
+</title>
+{%load staticfiles%}
+<script type="text/javascript" src="{%static 'bootstrap/js/bootstrap.min.js'%}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'back.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'dialog.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'profile.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'user.css' %}"/>
+</head>
+<body>
+
+<a href="#" id="muncul"></a>
+<div class="popup">
+<h4>Hello, {{full_name}}</h4>
+<table>
+<tr>
+<td><img src={% static 'welcome.jpg' %} width="600" height="350"></td>
+</tr>
+</table>
+
+<a class="close" href="#close"></a>
+
+
+
+</div>
+
+<div class="head">
+
+<div class="batas_head">
+<div class="pop">
+<a href="/accounts/loggedin/profile/{{id}}">Profile</a>
+</div>
+<div class="pop">
+<a href="/accounts/logout/">Logout</a>
+</div>
+<table align="right">
+<form action="#" method="GET">
+<tr><td><input type="text" name="cari" placeholder="Search..."></td><td><input type="submit" value="Cari"></td></tr>
+</form>
+</table>
+</div>
+</div>
+
+</div>
+
+
+
+<div class="wrapper">
+
+<div class="kepala">
+<img src="{% static 'kepala.jpg' %}">
+</div>
+
+<div class="title">
+
+<div class="menu1">
+<a href="/accounts/loggedin/galeri">Gallery</a>
+</div>
+
+<div class="menu2">
+<a href="/accounts/loggedin/">Home</a>
+</div>
+
+<div class="menu3">
+<a href="/accounts/loggedin/data_profile/{{id}}">Konfirmasi</a>
+</div>
+</div>
+<div class="judul2">
+
+
+</div>
+
+<div class="artikel">
+<div id="wrap">
+<div class="kotak_profile">
+
+
+
+<div class="poto">
+<img src="/media/{{pengguna.foto}}">
+</div>
+
+
+
+
+<div class="menu_profile">
+
+<a href="/accounts/loggedin/profile/{{id}}">Profile</a>
+</div>
+
+<div class="menu_riwayat">
+
+<a href="/accounts/loggedin/data_profile/{{id}}">Riwayat Event</a>
+</div>
+
+<div class="menu_ganti_pass">
+
+<a href="/accounts/loggedin/change_password/{{id}}">Ganti Password</a>
+</div>
+
+<div class="menu_keluar">
+
+<a href="/accounts/logout/">Logout</a>
+</div>
+</div>
+
+
+<div id="kontens">
+{% block content %}
+<h3>Data Akun</h3>
+
+<hr><br/>
+
+{% for profile in profile %}
+<form action="/event/proses_daftar/pengguna/{{profile.id}}" method="GET" enctype="multipart/form-data">
+<table>
+<tr>
+<td>Usename :</td>
+
+<td><input type="text" size="30" name="username" value="{{profile.username}}" class="textfield" ></td>
+</tr>
+<tr>
+<td>Nama Depan:</td>
+
+<td><input type="text" size="30" name="nama_depan" value="{{profile.pengguna.nama_depan}}" class="textfield"></td>
+</tr>
+<tr>
+<td>Nama Belakang:</td>
+
+<td><input type="text" size="30" name="nama_belakang" value="{{profile.pengguna.nama_belakang}}" class="textfield"></td>
+</tr>
+{% if profile.pengguna.jenis_kelamin == 'laki-laki' %}
+<tr>
+<td>Jenis Kelamin :</td>
+
+<td>
+<input type="radio" name="jk" value="laki-laki" checked="" >Laki-Laki</td>
+<td><input type="radio" name="jk" value="Perempuan" >Perempuan</td>
+{% endif %}
+{% if profile.pengguna.jenis_kelamin == 'perempuan' %}
+<tr>
+<td>Jenis Kelamin :</td>
+
+<td>
+<input type="radio" name="jk" value="laki-laki" >Laki-Laki</td>
+<td><input type="radio" name="jk" value="Perempuan" checked=""  >Perempuan</td>
+
+{% endif %}</td>
+</tr>
+<tr>
+<td>Email :</td>
+
+<td><input type="text" size="30" name="email" value="{{profile.pengguna.email}}" class="textfield" readonly></td>
+</tr>
+<tr>
+<td>NO KTP :</td>
+
+<td><input type="text" name="no_ktp" size="30" value="{{profile.pengguna.no_ktp}}" class="textfield"></td>
+</tr>
+<tr>
+<td>kota :</td>
+
+<td><input type="text" name="kota" size="30" value="{{profile.pengguna.kota}}" class="textfield"></td>
+</tr>
+<tr>
+<td>alamat :</td>
+
+<td><textarea name="alamat" value="">{{profile.pengguna.alamat}}</textarea></td>
+</tr>
+<tr>
+<td>Telepon :</td>
+
+<td><input type="text" size="30" value="{{profile.pengguna.telepon}}" name="telepon" class="textfield"></td>
+</tr>
+<tr>
+<td>telepon ke-2 :</td>
+
+<td><input type="text" size="30" name="telepon2" value="{{profile.pengguna.telepon2}}" class="textfield"></td>
+</tr>
+
+<tr>
+<input type="hidden" size="30" name="id_user" value="{{profile.id}}">
+<td><input type="submit" value="Masukkan" class="button" ></td></tr>
+</table>
+
+</form>
+{% endfor %}
+
+{% endblock %}
+
+
+</div>
+
+</div>
+</div>
+</div>
+
+</body>
+</html>
